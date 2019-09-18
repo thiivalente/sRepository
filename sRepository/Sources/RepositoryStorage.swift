@@ -8,14 +8,21 @@
 
 import Foundation
 
+/// Swift don't enable to create a associatedtype to model because
+/// isn't possible to use associatedtype inside associatedtype
+/// Note: This protocol is used in repository
 public protocol RepositoryStorage {
     
-    associatedtype Model: Any
-    init(environment: RepositoryEnvironment, model: Model)
     
-    func create(_ model: Model)
-    func read() -> [Model]
-    func update(_ model: Model)
-    func delete(_ model: Model)
+    /// Initiatize the repository storage type
+    ///
+    /// - Parameter environment: Set if exists the environments difference sets
+    init(environment: RepositoryEnvironment)
+    
+    func create(_ model: Any)
+    func read() -> [Any]
+    func find(by: Any) -> Any?
+    func update(_ model: Any)
+    func delete(_ model: Any)
 
 }

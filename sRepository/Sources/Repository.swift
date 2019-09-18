@@ -8,13 +8,12 @@
 
 import Foundation
 
+// TODO: Add logic to remote -> implements results assync with results
 public protocol Repository {
-
-    associatedtype T: RepositoryStorage
     
     /// Implements the storages in init
-    var localStorage: T? { get }
-    var remoteStorage: T? { get }
+    var localStorage: RepositoryStorage? { get set }
+    var remoteStorage: RepositoryStorage? { get set }
 
     associatedtype Model: Any
 
@@ -35,7 +34,7 @@ public protocol Repository {
     ///
     /// - Parameter id: id from this object
     /// - Returns: the first model found from this id
-    func find(by id: Any) -> Model
+    func find(by id: Any) -> Model?
 
     /// Find all objects where this dictionary response
     ///
@@ -47,13 +46,13 @@ public protocol Repository {
     ///
     /// - Parameter model: send the model which will be updated
     /// - Returns: the model updated
-    func update(_ model: Model) -> Model
+    func update(_ model: Model)
 
     /// Update the list of models
     ///
     /// - Parameter models: the list of models which will be updated
     /// - Returns: the array from model updated
-    func update(_ models: [Model]) -> [Model]
+    func update(_ models: [Model])
 
     /// Delete this model
     ///

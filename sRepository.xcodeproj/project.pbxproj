@@ -26,6 +26,7 @@
 		1BA29268233257000024DB0C /* PersonManage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA29266233257000024DB0C /* PersonManage+CoreDataProperties.swift */; };
 		1BA2926A2332570E0024DB0C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA292692332570E0024DB0C /* Person.swift */; };
 		1BA2926D233262900024DB0C /* PersonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2926C233262900024DB0C /* PersonRepository.swift */; };
+		1BA2926F23326C580024DB0C /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2926E23326C580024DB0C /* RepositoryFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		1BA29266233257000024DB0C /* PersonManage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonManage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BA292692332570E0024DB0C /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		1BA2926C233262900024DB0C /* PersonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRepository.swift; sourceTree = "<group>"; };
+		1BA2926E23326C580024DB0C /* RepositoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				1BA2924423324F2F0024DB0C /* Repository.swift */,
+				1BA2926E23326C580024DB0C /* RepositoryFactory.swift */,
 				1BA2924623324F2F0024DB0C /* RepositoryEnvironment.swift */,
 				1BA2924523324F2F0024DB0C /* RepositoryStorage.swift */,
 			);
@@ -317,6 +320,7 @@
 				1BA292582332528E0024DB0C /* sRepository.xcdatamodeld in Sources */,
 				1BA2926D233262900024DB0C /* PersonRepository.swift in Sources */,
 				1BA2922323324D300024DB0C /* ViewController.swift in Sources */,
+				1BA2926F23326C580024DB0C /* RepositoryFactory.swift in Sources */,
 				1BA292542332523B0024DB0C /* ConfigurableDao.swift in Sources */,
 				1BA2922123324D300024DB0C /* AppDelegate.swift in Sources */,
 				1BA292642332546B0024DB0C /* RepositoryStorage.swift in Sources */,
