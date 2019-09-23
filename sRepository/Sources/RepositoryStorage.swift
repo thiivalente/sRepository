@@ -19,10 +19,10 @@ public protocol RepositoryStorage {
     /// - Parameter environment: Set if exists the environments difference sets
     init(environment: RepositoryEnvironment)
     
-    func create(_ model: Any)
-    func read() -> [Any]
-    func find(by: Any) -> Any?
-    func update(_ model: Any)
-    func delete(_ model: Any)
+    func create(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void)
+    func read(completion: (Result<[Any], RepositoryError>) -> Void)
+    func find(by: Any, completion: (Result<Any?, RepositoryError>) -> Void)
+    func update(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void)
+    func delete(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void)
 
 }

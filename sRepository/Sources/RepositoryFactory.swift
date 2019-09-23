@@ -12,27 +12,48 @@ extension Repository {
 
     func all(completion: (Result<[Model], RepositoryError>) -> Void) {
         storages.forEach { storage in
-            guard let models = storage.read() as? [Self.Model] else {
-                return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
+            storage.read() { result in
+                switch result {
+                case .success(let models):
+                    guard let models = models as? [Self.Model] else {
+                        return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
+                    }
+                    return completion(.success(models))
+                case .failure(let error):
+                    return completion(.failure(error))
+                }
             }
-            return completion(.success(models))
         }
     }
 
     func save(_ model: Person, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
-            storage.create(model)
-            return completion(.success(()))
+            storage.create(model) { result in
+                switch result {
+                case .success(_):
+                    return completion(.success(()))
+                case .failure(let error):
+                    return completion(.failure(error))
+                }
+            }
         }
     }
 
     func find(by id: Any, completion: (Result<Model?, RepositoryError>) -> Void) {
         storages.forEach { storage in
-            if let result = storage.find(by: id) {
-                guard let model = result as? Self.Model else {
-                    return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
+            storage.find(by: id) { result in
+                switch result {
+                case .success(let model):
+                    guard let _ = model else {
+                        return completion(.success(nil))
+                    }
+                    guard let model = model as? Self.Model else {
+                        return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
+                    }
+                    return completion(.success(model))
+                case .failure(let error):
+                    return completion(.failure(error))
                 }
-                return completion(.success((model)))
             }
         }
     }
@@ -44,32 +65,56 @@ extension Repository {
 
     func update(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
-            storage.update(model)
-            return completion(.success(()))
+            storage.update(model) { result in
+                switch result {
+                case .success(_):
+                    return completion(.success(()))
+                case .failure(let error):
+                    return completion(.failure(error))
+                }
+            }
         }
     }
 
     func update(_ models: [Model], completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             models.forEach { model in
-                storage.update(model)
-                return completion(.success(()))
+                storage.update(model) { result in
+                    switch result {
+                    case .success(_):
+                        return completion(.success(()))
+                    case .failure(let error):
+                        return completion(.failure(error))
+                    }
+                }
             }
         }
     }
 
     func delete(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
-            storage.delete(model)
-            return completion(.success(()))
+            storage.delete(model) { result in
+                switch result {
+                case .success(_):
+                    return completion(.success(()))
+                case .failure(let error):
+                    return completion(.failure(error))
+                }
+            }
         }
     }
 
     func delete(_ models: [Person], completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             models.forEach { model in
-                storage.delete(model)
-                return completion(.success(()))
+                storage.delete(model) { result in
+                    switch result {
+                    case .success(_):
+                        return completion(.success(()))
+                    case .failure(let error):
+                        return completion(.failure(error))
+                    }
+                }
             }
         }
     }
