@@ -23,7 +23,7 @@ class PersonDao: RepositoryStorage {
         }!
     }
     
-    func create(_ model: Any) {
+    func create(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void) {
         let model = model as! Person
         let person = personDao.new()
         switch person {
@@ -32,12 +32,13 @@ class PersonDao: RepositoryStorage {
             person.name = model.name
             person.age = Int32(model.age)
             _ = personDao.save()
+            return completion(.success(()))
         default:
-            fatalError("Ocorreu um erro ao salvar")
+            return completion(.failure(RepositoryError(message: "Fail to save in core data")))
         }
     }
     
-    func read() -> [Any] {
+    func read(completion: (Result<[Any], RepositoryError>) -> Void) {
         let people = personDao.fetchAll()
         switch people {
         case .success(let people):
@@ -47,23 +48,22 @@ class PersonDao: RepositoryStorage {
                     Person(id: Int(person.id), name: person.name!, age: Int(person.age))
                 )
             }
-            return convertedModel
+            return completion(.success(convertedModel))
         default:
-            print("Fail to fetch people")
+            return completion(.failure(RepositoryError(message: "Fail to fetch people in core data")))
         }
-        return []
     }
     
-    func find(by: Any) -> Any? {
-        return nil
+    func find(by: Any, completion: (Result<Any?, RepositoryError>) -> Void) {
+        return completion(.failure(RepositoryError(message: "Method not implemented")))
     }
     
-    func update(_ model: Any) {
-        //
+    func update(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void) {
+        return completion(.failure(RepositoryError(message: "Method not implemented")))
     }
     
-    func delete(_ model: Any) {
-        //
+    func delete(_ model: Any, completion: (Result<Void, RepositoryError>) -> Void) {
+        return completion(.failure(RepositoryError(message: "Method not implemented")))
     }
 
 }
