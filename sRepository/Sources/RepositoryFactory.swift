@@ -10,62 +10,65 @@ import Foundation
 
 extension Repository {
 
-    func all() -> [Model] {
-        if let localStorage = self.localStorage {
-            guard let models = localStorage.read() as? [Self.Model] else {
+    func all(completion: (Result<[Model], RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            guard let models = storage.read() as? [Self.Model] else {
+                completion(.failure(.all))
                 fatalError("Fail to cast the model in repository")
             }
-            return models
-        }
-        return []
-    }
-
-    func save(_ model: Model) {
-        if let localStorage = self.localStorage {
-            localStorage.create(model)
+            completion(.success(models))
         }
     }
 
-    func find(by id: Any) -> Model? {
-        if let localStorage = self.localStorage {
-            if let result = localStorage.find(by: id) {
+    func save(_ model: Person, completion: (Result<Void, RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            storage.create(model)
+            completion(.success(()) )
+        }
+    }
+
+    func find(by id: Any, completion: (Result<Model?, RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            if let result = storage.find(by: id) {
                 guard let model = result as? Self.Model else {
+                    completion(.failure(.all))
                     fatalError("Fail to cast the model in repository")
                 }
-                return model
+                completion(.success((model)))
             }
-            return nil
+            completion(.failure(.all))
         }
-        return nil
     }
 
     // TODO: Create this logic
-    func find(by criteria: [String: Any]) -> [Model] {
-        return []
+    func find(by criteria: [String: Any], completion: (Result<[Model], RepositoryError>) -> Void) {
+        completion(.failure(.all))
     }
 
-    func update(_ model: Model) {
-        if let localStorage = self.localStorage {
-            localStorage.update(model)
+    func update(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            storage.update(model)
         }
     }
 
-    func update(_ models: [Model]) {
-        models.forEach { model in
-            self.update(model)
-        }
-    }
-
-    func delete(_ model: Model) {
-        if let localStorage = self.localStorage {
-            localStorage.delete(model)
-        }
-    }
-
-    func delete(_ models: [Model]) {
-        if let localStorage = self.localStorage {
+    func update(_ models: [Model], completion: (Result<Void, RepositoryError>) -> Void) {
+        storages.forEach { storage in
             models.forEach { model in
-                localStorage.delete(model)
+                storage.update(model)
+            }
+        }
+    }
+
+    func delete(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            storage.delete(model)
+        }
+    }
+
+    func delete(_ models: [Person], completion: (Result<Void, RepositoryError>) -> Void) {
+        storages.forEach { storage in
+            models.forEach { model in
+                storage.delete(model)
             }
         }
     }

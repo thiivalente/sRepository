@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B64C0652338F1BC008649D1 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B64C0642338F1BC008649D1 /* RepositoryError.swift */; };
 		1BA2922123324D300024DB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2922023324D300024DB0C /* AppDelegate.swift */; };
 		1BA2922323324D300024DB0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2922223324D300024DB0C /* ViewController.swift */; };
 		1BA2922823324D340024DB0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BA2922723324D340024DB0C /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B64C0642338F1BC008649D1 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		1BA2921D23324D300024DB0C /* sRepository.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sRepository.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA2922023324D300024DB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BA2922223324D300024DB0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				1BA2926E23326C580024DB0C /* RepositoryFactory.swift */,
 				1BA2924623324F2F0024DB0C /* RepositoryEnvironment.swift */,
 				1BA2924523324F2F0024DB0C /* RepositoryStorage.swift */,
+				1B64C0642338F1BC008649D1 /* RepositoryError.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				1BA292512332523B0024DB0C /* CoreError.swift in Sources */,
 				1BA292522332523B0024DB0C /* CoreStack.swift in Sources */,
 				1BA292582332528E0024DB0C /* sRepository.xcdatamodeld in Sources */,
+				1B64C0652338F1BC008649D1 /* RepositoryError.swift in Sources */,
 				1BA2926D233262900024DB0C /* PersonRepository.swift in Sources */,
 				1BA2922323324D300024DB0C /* ViewController.swift in Sources */,
 				1BA2926F23326C580024DB0C /* RepositoryFactory.swift in Sources */,
