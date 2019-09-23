@@ -11,13 +11,11 @@ import Foundation
 class PersonRepository: Repository {
     
     typealias Model = Person
-    
-    var localStorage: RepositoryStorage?
-    var remoteStorage: RepositoryStorage?
-    
+
+    var storages: [RepositoryStorage] = []
+
     required init(environment: RepositoryEnvironment) {
-        self.localStorage = PersonDao(environment: environment)
-        self.remoteStorage = nil
+        self.storages.append(PersonDao(environment: environment))
     }
 
 }

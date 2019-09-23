@@ -20,10 +20,16 @@ class ViewController: UIViewController {
             name: "Example",
             age: Int.random(in: 10...60)
         )
-        repository.save(newPerson)
-        
-        print(repository.all())
+        repository.save(newPerson) { result in
+            if case .failure(let fail) = result {
+                print(fail.message)
+            }
+        }
+
+        repository.all() { result in
+            if case .success(let persons) = result {
+                print(persons)
+            }
+        }
     }
-
-
 }
