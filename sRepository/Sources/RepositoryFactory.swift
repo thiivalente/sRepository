@@ -13,17 +13,16 @@ extension Repository {
     func all(completion: (Result<[Model], RepositoryError>) -> Void) {
         storages.forEach { storage in
             guard let models = storage.read() as? [Self.Model] else {
-                completion(.failure(.all))
-                fatalError("Fail to cast the model in repository")
+                return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
             }
-            completion(.success(models))
+            return completion(.success(models))
         }
     }
 
     func save(_ model: Person, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             storage.create(model)
-            completion(.success(()) )
+            return completion(.success(()))
         }
     }
 
@@ -31,23 +30,22 @@ extension Repository {
         storages.forEach { storage in
             if let result = storage.find(by: id) {
                 guard let model = result as? Self.Model else {
-                    completion(.failure(.all))
-                    fatalError("Fail to cast the model in repository")
+                    return completion(.failure(RepositoryError(message: "Fail to cast the model in repository")))
                 }
-                completion(.success((model)))
+                return completion(.success((model)))
             }
-            completion(.failure(.all))
         }
     }
 
     // TODO: Create this logic
     func find(by criteria: [String: Any], completion: (Result<[Model], RepositoryError>) -> Void) {
-        completion(.failure(.all))
+        return completion(.failure(RepositoryError(message: "Method not implemented")))
     }
 
     func update(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             storage.update(model)
+            return completion(.success(()))
         }
     }
 
@@ -55,6 +53,7 @@ extension Repository {
         storages.forEach { storage in
             models.forEach { model in
                 storage.update(model)
+                return completion(.success(()))
             }
         }
     }
@@ -62,6 +61,7 @@ extension Repository {
     func delete(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             storage.delete(model)
+            return completion(.success(()))
         }
     }
 
@@ -69,6 +69,7 @@ extension Repository {
         storages.forEach { storage in
             models.forEach { model in
                 storage.delete(model)
+                return completion(.success(()))
             }
         }
     }

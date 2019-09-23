@@ -27,8 +27,11 @@ class ViewController: UIViewController {
         }
 
         repository.all() { result in
-            if case .success(let persons) = result {
-                print(persons)
+            switch result {
+            case .success(let persons):
+                print("Teste: \(persons)")
+            case .failure(let error):
+                print(error.message)
             }
         }
     }
