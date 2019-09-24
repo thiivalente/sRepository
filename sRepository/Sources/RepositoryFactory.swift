@@ -26,7 +26,7 @@ extension Repository {
         }
     }
 
-    func save(_ model: Person, completion: (Result<Void, RepositoryError>) -> Void) {
+    func save(_ model: Model, completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             storage.create(model) { result in
                 switch result {
@@ -39,7 +39,7 @@ extension Repository {
         }
     }
 
-    func find(by id: Any, completion: (Result<Model?, RepositoryError>) -> Void) {
+    func find(by id: Model, completion: (Result<Model?, RepositoryError>) -> Void) {
         storages.forEach { storage in
             storage.find(by: id) { result in
                 switch result {
