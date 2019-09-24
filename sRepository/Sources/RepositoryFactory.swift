@@ -104,7 +104,7 @@ extension Repository {
         }
     }
 
-    func delete(_ models: [Person], completion: (Result<Void, RepositoryError>) -> Void) {
+    func delete(_ models: [Model], completion: (Result<Void, RepositoryError>) -> Void) {
         storages.forEach { storage in
             models.forEach { model in
                 storage.delete(model) { result in
